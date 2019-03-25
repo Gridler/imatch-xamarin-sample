@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:iMatchSample"
+             x:Class="iMatchSample.MainPage"
+             Title = "Gridler iMatch Xamarin Sample">
+
+    <StackLayout BackgroundColor="Black">
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+          <Button BackgroundColor="SteelBlue" TextColor="Black" WidthRequest="110" Text="Connect" Clicked="ConnectButton_Clicked">
+            <Button.Triggers>
+              <DataTrigger TargetType="Button" Binding="{Binding Connected}" Value="true">
+                <Setter Property="Text" Value="Disconnect" />
+              </DataTrigger>
+              <DataTrigger TargetType="Button" Binding="{Binding Connected}" Value="false">
+                <Setter Property="Text" Value="Connect" />
+              </DataTrigger>
+            </Button.Triggers>
+          </Button>
+            <Button BackgroundColor="SteelBlue" TextColor="Black" WidthRequest="110" Text="Info" Clicked="InfoButton_Clicked" IsVisible="{Binding Connected}" />
+            <Button BackgroundColor="SteelBlue" TextColor="Black" WidthRequest="110" Text="Update" Clicked="FWUpdateButton_Clicked" IsVisible="{Binding Connected}" />
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+            <Button BackgroundColor="SteelBlue" TextColor="Black" WidthRequest="110" Text="FPR" Clicked="FPRButton_Clicked" IsVisible="{Binding Connected}" />
+            <Button BackgroundColor="SteelBlue" TextColor="Black" WidthRequest="110" Text="SCR" Clicked="SCRButton_Clicked" IsVisible="{Binding Connected}" />
+            <Button BackgroundColor="SteelBlue" TextColor="Black" WidthRequest="110" Text="NFC" Clicked="NFCButton_Clicked" IsVisible="{Binding Connected}" />
+        </StackLayout>
+
+        <StackLayout IsVisible="{Binding UpdatingFirmware}">
+            <ProgressBar x:Name="progressBar" Progress="{Binding FirmwareUpdateProgress}"/>
+            <Label Text="{Binding FirmwareUpdateText}" TextColor="SteelBlue"/>
+        </StackLayout>
+
+        <ListView x:Name="listView" HasUnevenRows="true" ItemsSource="{Binding MessageList}" BackgroundColor="Black" IsVisible="{Binding Connected}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="4, 4, 4, 4" HorizontalOptions="StartAndExpand" Orientation="Vertical">
+                            <Label TextColor="White" Text="{Binding .}" VerticalTextAlignment="Center" FontSize="Small" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </StackLayout>
+
+</ContentPage>
