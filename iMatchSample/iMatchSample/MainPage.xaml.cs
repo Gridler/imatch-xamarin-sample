@@ -12,7 +12,6 @@ namespace iMatchSample
 
         IiMatch iMatch;
         IAdapter adapter;
-        IBluetoothLE bluetoothBLE;
 
         private ObservableCollection<String> messageList = new ObservableCollection<string>();
         public ObservableCollection<String> MessageList
@@ -82,7 +81,6 @@ namespace iMatchSample
         {
             if (iMatch == null || !iMatch.IsConnected)
             {
-                bluetoothBLE = CrossBluetoothLE.Current;
                 adapter = CrossBluetoothLE.Current.Adapter;
 
                 if (iMatch == null)
