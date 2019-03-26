@@ -3,8 +3,8 @@
 This sample project demonstrates how to use the iMatch Xamarin plugin.
 
 # How to install
-1. Clone this repository and open the project with Android Studio.
-2. Build and run application on device.
+1. Clone this repository and open the project with Visual Studio.
+2. Build and run the application on an Android or iOS device.
 
 ## How to add the plugin to your project
 The iMatch Xamarin plugin is available on [nuget](https://www.nuget.org/packages/Gridler.iMatch).
