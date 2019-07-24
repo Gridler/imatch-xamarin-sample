@@ -139,7 +139,13 @@ namespace iMatchSample
 
         private void NFCButton_Clicked(object sender, EventArgs e)
         {
-            iMatch.sendCommand(Devices.RfidReader, Methods.MrtdRead, "D1NLD2509496211136GP2N3MN8SB56");
+            String mrz = "D1NLD2509496211136GP2N3MN8SB56";
+            String bypassPACE = "0";
+            String checkMAC = "1";
+            String includeHeaders = "1";
+            String apduLogging = "0";
+            String readParams = mrz + "," + bypassPACE + "," + checkMAC + "," + includeHeaders + "," + apduLogging;
+            iMatch.sendCommand(Devices.RfidReader, Methods.MrtdRead, readParams);
         }
 
         private void Imatch_LogMessage(object sender, LogEventArgs e)
@@ -197,6 +203,11 @@ namespace iMatchSample
                 {
                     byte[] nfcData = Convert.FromBase64String(e.Message.Data);
                     message = e.Message.Device + " " + e.Message.Method + ": " + nfcData.Length + " bytes";
+                }
+                if (e.Message.Method == "read_dg1")
+                {
+                    byte[] nfcData = Convert.FromBase64String(e.Message.Data);
+                    message = e.Message.Device + " " + e.Message.Method + ": " + System.Text.Encoding.UTF8.GetString(nfcData);
                 }
             }
             else if (e.Message.Device == "sys")
